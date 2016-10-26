@@ -1,4 +1,4 @@
-import { REQUEST_CHORES, RECEIVE_CHORES, RECEIVE_CHORE } from '../actions/chore_actions';
+import { REQUEST_CHORES, RECEIVE_CHORES, RECEIVE_CHORE, REMOVE_CHORE } from '../actions/chore_actions';
 import { merge } from 'lodash';
 
 const _defaultState = {
@@ -29,11 +29,10 @@ const choresReducer = (oldState = _defaultState, action) => {
       newState[action.chore.id] = action.chore;
       return newState;
     case REMOVE_CHORE:
-    // for reference!
-    // var test = {'red':'#FF0000', 'blue':'#0000FF'};
-    // delete test.blue; // or use => delete test['blue'];
-    // console.log(test);
-
+      let deletedChore = JSON.parse(action.chore);
+      newState = merge({}, oldState);
+      delete newState[deletedChore.id];
+      return newState;
     default:
       return oldState;
   }

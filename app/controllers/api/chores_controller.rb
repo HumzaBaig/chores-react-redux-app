@@ -21,7 +21,7 @@ class Api::ChoresController < ApplicationController
   def update
     @chore = Chore.find(params[:id])
     if @chore.update(chore_params)
-      render json: @chore
+      render json: @chore, status: 200
     else
       render json: @chore.errors.full_messages, status: 422
     end
